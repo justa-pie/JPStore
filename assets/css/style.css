@@ -153,10 +153,13 @@ h1 {
 
 .contact {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: gray;
     font-size: medium;
-    left: 5px;
-    bottom: 5px;
+    text-align: center;
+    bottom: 10px;
 }
 
 /* Responsive */
