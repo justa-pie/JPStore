@@ -18,8 +18,6 @@
         <h1>Justa Pie</h1>
         <p class="subtitle">I just sort of always feel sick without you baby</p>
         <p class="subtitle">Nothing seems to stick without you, baby</p>
-        <p class="subtitle">It's just the pits without you, baby</p>
-        <p class="subtitle">It's really just the pits without you, baby</p>
         <p class="subtitle">It's like everyone's a dick without you, baby</p>
         <div class="location">
             <span>📍</span>
@@ -63,36 +61,32 @@
         const starsContainer = document.getElementById('stars');
         const allStars = []; // Mảng để lưu trữ tất cả các ngôi sao
 
-        for (let i = 0; i < 300; i++) { // Số lượng ngôi sao
+        for (let i = 0; i < 300; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             star.style.left = Math.random() * 100 + '%';
             star.style.top = Math.random() * 100 + '%';
             star.style.animationDelay = Math.random() * 3 + 's';
             starsContainer.appendChild(star);
-            allStars.push(star); // Thêm ngôi sao vào mảng
+            allStars.push(star);
         }
 
-        const interactionRadius = 100; // Bán kính tương tác (pixels)
+        const interactionRadius = 150; // ĐIỀU CHỈNH QUAN TRỌNG: Tăng bán kính tương tác (pixels)
 
         document.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX;
             const mouseY = e.clientY;
 
-            // Dùng requestAnimationFrame để tối ưu hiệu suất, giúp hiệu ứng mượt hơn
             requestAnimationFrame(() => {
                 allStars.forEach(star => {
-                    // Lấy vị trí thực tế của ngôi sao trên màn hình
                     const starRect = star.getBoundingClientRect();
                     const starX = starRect.left + starRect.width / 2;
                     const starY = starRect.top + starRect.height / 2;
 
-                    // Tính khoảng cách giữa chuột và ngôi sao
                     const distance = Math.sqrt(
                         Math.pow(mouseX - starX, 2) + Math.pow(mouseY - starY, 2)
                     );
 
-                    // Nếu ngôi sao nằm trong bán kính tương tác, làm nó sáng rực lên
                     if (distance < interactionRadius) {
                         star.classList.add('active');
                     } else {
@@ -102,16 +96,14 @@
             });
         });
 
-        // Xử lý phát nhạc (như đã thảo luận)
+        // Xử lý phát nhạc
         const backgroundAudio = document.getElementById('backgroundAudio');
         document.addEventListener('click', function attemptPlay() {
             backgroundAudio.play()
                 .then(() => {
                     document.removeEventListener('click', attemptPlay);
                 })
-                .catch(error => {
-                    // console.warn("Audio playback was prevented. Waiting for next interaction.", error);
-                });
+                .catch(error => {});
         });
         
     </script>
