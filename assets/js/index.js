@@ -241,4 +241,64 @@ document.addEventListener('DOMContentLoaded', () => {
     products.forEach(product => {
         product.style.display = 'block';
     });
+
+    // Background Music Control
+    const bgMusic = document.getElementById('bgMusic');
+    const musicControl = document.getElementById('musicControl');
+    
+    if (bgMusic && musicControl) {
+        bgMusic.volume = 0.3; // Set volume to 30%
+        let musicStarted = false;
+
+        // Function to start music
+        const startMusic = () => {
+            if (!musicStarted) {
+                bgMusic.play().then(() => {
+                    console.log('🎵 Music started!');
+                    musicStarted = true;
+                    musicControl.classList.remove('muted');
+                    musicControl.classList.add('playing');
+                }).catch(error => {
+                    console.log('Waiting for user interaction...', error);
+                });
+            }
+        };
+
+        // Try to play immediately
+        startMusic();
+
+        // Start music on ANY user interaction
+        const interactions = ['click', 'touchstart', 'keydown', 'mousemove', 'scroll'];
+        const startOnInteraction = () => {
+            if (!musicStarted) {
+                startMusic();
+                // Remove all listeners after music starts
+                interactions.forEach(event => {
+                    document.removeEventListener(event, startOnInteraction);
+                });
+            }
+        };
+
+        // Add listeners for all interaction types
+        interactions.forEach(event => {
+            document.addEventListener(event, startOnInteraction, { once: true });
+        });
+
+        // Music control button
+        musicControl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicControl.classList.remove('muted');
+                musicControl.classList.add('playing');
+                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                bgMusic.pause();
+                musicControl.classList.add('muted');
+                musicControl.classList.remove('playing');
+                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+        });
+    }
 });
