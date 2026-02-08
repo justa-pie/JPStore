@@ -20,11 +20,25 @@ function showPage(pageName) {
     const categoryItems = document.querySelectorAll('.category-item');
     categoryItems.forEach(item => item.classList.remove('active'));
     
+    // Set active for home if showing home page
+    if (pageName === 'home') {
+        const homeItem = document.querySelector('.category-item[onclick*="showPage(\'home\')"]');
+        if (homeItem) {
+            homeItem.classList.add('active');
+        }
+    }
+    
     // Close sidebar on mobile
     if (window.innerWidth <= 1024) {
         const sidebar = document.getElementById('sidebar');
         sidebar.classList.remove('active');
     }
+    
+    // Scroll to top when switching pages
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 
 // Filter Products by Category
@@ -33,23 +47,22 @@ function filterProducts(category) {
     showPage('products');
     
     const products = document.querySelectorAll('.product-card');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    // Update active filter button
-    filterButtons.forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.textContent.toLowerCase().includes(category) || 
-            (category === 'all' && btn.textContent === 'Tất Cả')) {
-            btn.classList.add('active');
-        }
-    });
     
     // Update active sidebar item
     const categoryItems = document.querySelectorAll('.category-item');
     categoryItems.forEach(item => item.classList.remove('active'));
-    event.target.closest('.category-item').classList.add('active');
     
-    // Filter products
+    // Find and activate the correct sidebar item
+    const activeItem = Array.from(categoryItems).find(item => {
+        const onclick = item.getAttribute('onclick');
+        return onclick && onclick.includes(`filterProducts('${category}')`);
+    });
+    
+    if (activeItem) {
+        activeItem.classList.add('active');
+    }
+    
+    // Filter products with animation
     products.forEach(product => {
         const productCategory = product.getAttribute('data-category');
         
@@ -74,25 +87,6 @@ function filterProducts(category) {
     }
 }
 
-// Add to Cart Function
-function addToCart(productName) {
-    const toast = document.getElementById('toast');
-    const toastMessage = document.getElementById('toast-message');
-    
-    toastMessage.textContent = `Đã thêm "${productName}" vào giỏ hàng!`;
-    toast.classList.add('show');
-    
-    // Update cart badge
-    const badge = document.querySelector('.cart-badge');
-    const currentCount = parseInt(badge.textContent);
-    badge.textContent = currentCount + 1;
-    
-    // Hide toast after 3 seconds
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
-}
-
 // Search Functionality
 const searchInput = document.querySelector('.search-box input');
 if (searchInput) {
@@ -103,6 +97,10 @@ if (searchInput) {
         // Switch to products page when searching
         if (searchTerm.length > 0) {
             showPage('products');
+            
+            // Deactivate all sidebar items when searching
+            const categoryItems = document.querySelectorAll('.category-item');
+            categoryItems.forEach(item => item.classList.remove('active'));
         }
         
         products.forEach(product => {
@@ -114,10 +112,25 @@ if (searchInput) {
                 productDesc.includes(searchTerm) || 
                 productCategory.includes(searchTerm)) {
                 product.style.display = 'block';
+                product.style.opacity = '1';
+                product.style.transform = 'translateY(0)';
             } else {
-                product.style.display = 'none';
+                product.style.opacity = '0';
+                product.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    product.style.display = 'none';
+                }, 300);
             }
         });
+        
+        // If search is cleared, show all products
+        if (searchTerm.length === 0) {
+            products.forEach(product => {
+                product.style.display = 'block';
+                product.style.opacity = '1';
+                product.style.transform = 'translateY(0)';
+            });
+        }
     });
 }
 
@@ -134,49 +147,18 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Filter Button Click Handler for Products Page
-const filterButtons = document.querySelectorAll('.filter-btn');
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const buttonText = button.textContent;
-        let category = 'all';
-        
-        if (buttonText.includes('Discord Nitro')) category = 'discord-nitro';
-        else if (buttonText.includes('Server Boost')) category = 'server-boost';
-        else if (buttonText.includes('Spotify')) category = 'spotify';
-        else if (buttonText.includes('Netflix')) category = 'netflix';
-        
-        // Update active button
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
-        // Filter products
-        const products = document.querySelectorAll('.product-card');
-        products.forEach(product => {
-            const productCategory = product.getAttribute('data-category');
-            
-            if (category === 'all' || productCategory === category) {
-                product.style.display = 'block';
-                setTimeout(() => {
-                    product.style.opacity = '1';
-                    product.style.transform = 'translateY(0)';
-                }, 10);
-            } else {
-                product.style.opacity = '0';
-                product.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    product.style.display = 'none';
-                }, 300);
-            }
-        });
-    });
-});
-
 // Smooth Scroll for All Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        
+        // Don't prevent default for Discord link placeholder
+        if (href === '#DISCORD_LINK') {
+            return;
+        }
+        
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) {
             target.scrollIntoView({
                 behavior: 'smooth'
@@ -232,7 +214,26 @@ document.querySelectorAll('.stat-card').forEach(card => {
     observer.observe(card);
 });
 
+// Handle window resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        // Close sidebar on desktop size
+        if (window.innerWidth > 1024) {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.remove('active');
+        }
+    }, 250);
+});
+
 // Initialize - Show home page by default
 document.addEventListener('DOMContentLoaded', () => {
     showPage('home');
+    
+    // Make sure all products are visible on page load
+    const products = document.querySelectorAll('.product-card');
+    products.forEach(product => {
+        product.style.display = 'block';
+    });
 });

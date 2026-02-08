@@ -23,11 +23,6 @@
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Tìm kiếm sản phẩm...">
             </div>
-            <button class="icon-btn" title="Giỏ hàng">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-badge">0</span>
-            </button>
-            <button class="icon-btn" title="Tài khoản"><i class="fas fa-user"></i></button>
         </div>
     </div>
 
@@ -40,6 +35,15 @@
                 <a href="#" class="category-item active" onclick="showPage('home')">
                     <span class="category-icon"><i class="fas fa-home"></i></span>
                     <span class="category-name">Trang Chủ</span>
+                </a>
+                <a href="#" class="category-item" onclick="filterProducts('all')">
+                    <span class="category-icon"><i class="fas fa-th"></i></span>
+                    <span class="category-name">Tất Cả Sản Phẩm</span>
+                    <span class="category-count">31</span>
+                </a>
+                <a href="#" class="category-item" onclick="showPage('purchase')">
+                    <span class="category-icon"><i class="fas fa-shopping-bag"></i></span>
+                    <span class="category-name">Mua Hàng & Hỗ Trợ</span>
                 </a>
             </div>
 
@@ -112,6 +116,7 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            <div class="pages-wrapper">
             <!-- Home Page -->
             <div id="home-page" class="page-content active">
                 <!-- Profile Card (Discord Style) -->
@@ -186,7 +191,7 @@
                             Khám phá bộ sưu tập premium accounts và dịch vụ Discord cao cấp 
                             với giá tốt nhất thị trường. Giao hàng tức thì, hỗ trợ 24/7.
                         </p>
-                        <button class="hero-btn" onclick="showPage('products')">Khám Phá Ngay</button>
+                        <button class="hero-btn" onclick="filterProducts('all')">Khám Phá Ngay</button>
                     </div>
                 </div>
 
@@ -289,15 +294,10 @@
 
                 <!-- Testimonials -->
                 <div class="testimonials-section">
-                    <h2 class="section-title">Khách Hàng Nói Gì Về Chúng Tôi</h2>
-                    <p class="section-description">
-                        Chúng tôi trân trọng phản hồi của bạn và luôn cố gắng cung cấp dịch vụ tốt nhất. 
-                        Đây là những gì khách hàng của chúng tôi nói về trải nghiệm của họ.
-                    </p>
-
+                    <h2 class="section-title">Khách Hàng Nói Gì Về JPStore</h2>
                     <div class="testimonials-grid">
                         <div class="testimonial-card">
-                            <div class="stars">
+                            <div class="testimonial-stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -305,20 +305,17 @@
                                 <i class="fas fa-star"></i>
                             </div>
                             <p class="testimonial-text">
-                                "Thật điên rồ khi mọi thứ nhanh và tức thì như vậy. Tôi đã sử dụng dịch vụ này 
-                                được một thời gian rồi! Dịch vụ tuyệt vời và luôn hoạt động! Thật sự uy tín."
+                                "Mình đã mua Discord Nitro ở đây và cực kỳ hài lòng! Giao hàng siêu nhanh, 
+                                hỗ trợ nhiệt tình. Giá cả cũng rất hợp lý so với thị trường."
                             </p>
                             <div class="testimonial-author">
-                                <div class="author-avatar">S</div>
-                                <div class="author-info">
-                                    <h4>Sarah Johnson</h4>
-                                    <p>Khách hàng thân thiết</p>
-                                </div>
+                                <div class="author-name">Nguyễn Minh T.</div>
+                                <div class="author-role">Khách hàng thân thiết</div>
                             </div>
                         </div>
 
                         <div class="testimonial-card">
-                            <div class="stars">
+                            <div class="testimonial-stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -326,20 +323,17 @@
                                 <i class="fas fa-star"></i>
                             </div>
                             <p class="testimonial-text">
-                                "Hỗ trợ nhanh như chớp và cực kỳ thân thiện, tôi chắc chắn giới thiệu mọi người mua! 
-                                Chưa bao giờ gặp vấn đề, luôn nhận được những gì tôi trả tiền."
+                                "Shop uy tín, mình đã mua nhiều lần rồi. Từ Spotify Premium đến Netflix đều chất lượng. 
+                                Recommend cho mọi người!"
                             </p>
                             <div class="testimonial-author">
-                                <div class="author-avatar">M</div>
-                                <div class="author-info">
-                                    <h4>Michael Chen</h4>
-                                    <p>Khách hàng VIP</p>
-                                </div>
+                                <div class="author-name">Trần Hoàng A.</div>
+                                <div class="author-role">Đã mua 5+ sản phẩm</div>
                             </div>
                         </div>
 
                         <div class="testimonial-card">
-                            <div class="stars">
+                            <div class="testimonial-stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -347,15 +341,12 @@
                                 <i class="fas fa-star"></i>
                             </div>
                             <p class="testimonial-text">
-                                "Cửa hàng dễ sử dụng, giao hàng nhanh và hỗ trợ tốt! Tôi sẽ giới thiệu cho 
-                                bất kỳ ai đang tìm kiếm trải nghiệm mượt mà."
+                                "Dịch vụ build server Discord rất chuyên nghiệp. Team support nhiệt tình, 
+                                làm đúng theo yêu cầu. Sẽ quay lại ủng hộ!"
                             </p>
                             <div class="testimonial-author">
-                                <div class="author-avatar">E</div>
-                                <div class="author-info">
-                                    <h4>Emma Rodriguez</h4>
-                                    <p>Khách hàng mới</p>
-                                </div>
+                                <div class="author-name">Lê Quốc V.</div>
+                                <div class="author-role">Server Owner</div>
                             </div>
                         </div>
                     </div>
@@ -364,22 +355,14 @@
 
             <!-- Products Page -->
             <div id="products-page" class="page-content">
-                <div class="section-header">
-                    <h2 class="section-title">Sản Phẩm Của Chúng Tôi</h2>
-                    <div class="filter-buttons">
-                        <button class="filter-btn active" onclick="filterProducts('all')">Tất Cả</button>
-                        <button class="filter-btn" onclick="filterProducts('discord-nitro')">Discord Nitro</button>
-                        <button class="filter-btn" onclick="filterProducts('server-boost')">Server Boost</button>
-                        <button class="filter-btn" onclick="filterProducts('spotify')">Spotify</button>
-                        <button class="filter-btn" onclick="filterProducts('netflix')">Netflix</button>
-                    </div>
+                <div class="products-header">
+                    <h2 class="products-title">Sản Phẩm Của Chúng Tôi</h2>
+                    <p class="products-subtitle">Khám phá các dịch vụ và sản phẩm cao cấp</p>
                 </div>
 
-                <div class="products-grid" id="products-grid">
-                    
+                <div class="products-grid">
                     <!-- ==================== DISCORD NITRO ==================== -->
                     
-                    <!-- Nitro Trial 3 Tháng -->
                     <div class="product-card" data-category="discord-nitro">
                         <div class="product-image">
                             <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
@@ -387,16 +370,15 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Trial 3 Tháng</h3>
-                            <p class="product-description">Dùng thử Discord Nitro 3 tháng. Chỉ dành cho TK tạo trên 1 tháng và chưa từng dùng Nitro</p>
+                            <h3 class="product-name">Nitro Basic - 1 Tháng</h3>
+                            <p class="product-description">Nâng cấp trải nghiệm Discord với emoji tùy chỉnh, upload file lớn hơn</p>
                             <div class="product-footer">
-                                <div class="product-price">49K</div>
-                                <button class="add-to-cart" onclick="addToCart('Nitro Trial 3 Tháng')">Thêm vào giỏ</button>
+                                <div class="product-price">40K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Nitro Boost 1 Tháng -->
                     <div class="product-card" data-category="discord-nitro">
                         <div class="product-image">
                             <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
@@ -404,16 +386,15 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Boost 1 Tháng</h3>
-                            <p class="product-description">Discord Nitro đầy đủ tính năng cho 1 tháng</p>
+                            <h3 class="product-name">Nitro Classic - 1 Tháng</h3>
+                            <p class="product-description">Toàn bộ tính năng Nitro cơ bản với giá hợp lý</p>
                             <div class="product-footer">
-                                <div class="product-price">89K</div>
-                                <button class="add-to-cart" onclick="addToCart('Nitro Boost 1 Tháng')">Thêm vào giỏ</button>
+                                <div class="product-price">90K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Nitro Boost 2 Tháng -->
                     <div class="product-card" data-category="discord-nitro">
                         <div class="product-image">
                             <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
@@ -421,50 +402,47 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Boost 2 Tháng</h3>
-                            <p class="product-description">Discord Nitro cho 2 tháng với giá ưu đãi</p>
+                            <h3 class="product-name">Nitro Classic - 3 Tháng</h3>
+                            <p class="product-description">Tiết kiệm hơn khi mua gói 3 tháng</p>
                             <div class="product-footer">
-                                <div class="product-price">109K</div>
-                                <button class="add-to-cart" onclick="addToCart('Nitro Boost 2 Tháng')">Thêm vào giỏ</button>
+                                <div class="product-price">240K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Nitro Boost 4 Tháng -->
                     <div class="product-card" data-category="discord-nitro">
                         <div class="product-image">
                             <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
-                            <span class="stock-badge">Còn hàng</span>
+                            <span class="stock-badge hot">Hot</span>
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Boost 4 Tháng</h3>
-                            <p class="product-description">Discord Nitro cho 4 tháng - giá trị tốt nhất</p>
+                            <h3 class="product-name">Nitro Full - 1 Tháng</h3>
+                            <p class="product-description">Trải nghiệm đầy đủ nhất với server boost, HD streaming</p>
                             <div class="product-footer">
-                                <div class="product-price">229K</div>
-                                <button class="add-to-cart" onclick="addToCart('Nitro Boost 4 Tháng')">Thêm vào giỏ</button>
+                                <div class="product-price">150K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Nitro Boost 6 Tháng -->
                     <div class="product-card" data-category="discord-nitro">
                         <div class="product-image">
                             <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
-                            <span class="stock-badge">Còn hàng</span>
+                            <span class="stock-badge hot">Hot</span>
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Boost 6 Tháng</h3>
-                            <p class="product-description">Discord Nitro cho nửa năm sử dụng</p>
+                            <h3 class="product-name">Nitro Full - 3 Tháng</h3>
+                            <p class="product-description">Gói ưu đãi 3 tháng với đầy đủ tính năng</p>
                             <div class="product-footer">
-                                <div class="product-price">339K</div>
-                                <button class="add-to-cart" onclick="addToCart('Nitro Boost 6 Tháng')">Thêm vào giỏ</button>
+                                <div class="product-price">375K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Nitro Boost 12 Tháng -->
                     <div class="product-card" data-category="discord-nitro">
                         <div class="product-image">
                             <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
@@ -472,11 +450,11 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Boost 12 Tháng</h3>
-                            <p class="product-description">Discord Nitro cho cả năm - tiết kiệm nhất!</p>
+                            <h3 class="product-name">Nitro Full - 1 Năm</h3>
+                            <p class="product-description">Tiết kiệm nhất với gói 1 năm Nitro Full</p>
                             <div class="product-footer">
-                                <div class="product-price">849K</div>
-                                <button class="add-to-cart" onclick="addToCart('Nitro Boost 12 Tháng')">Thêm vào giỏ</button>
+                                <div class="product-price">1399K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -489,12 +467,12 @@
                             <span class="stock-badge">Còn hàng</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Decoration</div>
-                            <h3 class="product-name">Decoration Tier 1</h3>
-                            <p class="product-description">Discord: 66K | JPStore: 23K</p>
+                            <div class="product-category">Decorations</div>
+                            <h3 class="product-name">Profile Effect - 1 Tháng</h3>
+                            <p class="product-description">Hiệu ứng profile độc đáo để nổi bật</p>
                             <div class="product-footer">
-                                <div class="product-price">23K <span class="price-original">66K</span></div>
-                                <button class="add-to-cart" onclick="addToCart('Decoration Tier 1')">Thêm vào giỏ</button>
+                                <div class="product-price">45K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -505,12 +483,12 @@
                             <span class="stock-badge">Còn hàng</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Decoration</div>
-                            <h3 class="product-name">Decoration Tier 2</h3>
-                            <p class="product-description">Discord: 79K | JPStore: 36K</p>
+                            <div class="product-category">Decorations</div>
+                            <h3 class="product-name">Profile Effect - 3 Tháng</h3>
+                            <p class="product-description">Gói 3 tháng với giá ưu đãi</p>
                             <div class="product-footer">
-                                <div class="product-price">36K <span class="price-original">79K</span></div>
-                                <button class="add-to-cart" onclick="addToCart('Decoration Tier 2')">Thêm vào giỏ</button>
+                                <div class="product-price">115K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -521,12 +499,12 @@
                             <span class="stock-badge">Còn hàng</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Decoration</div>
-                            <h3 class="product-name">Decoration Tier 3</h3>
-                            <p class="product-description">Discord: 92K | JPStore: 54K</p>
+                            <div class="product-category">Decorations</div>
+                            <h3 class="product-name">Avatar Decoration - 1 Tháng</h3>
+                            <p class="product-description">Trang trí avatar độc đáo</p>
                             <div class="product-footer">
-                                <div class="product-price">54K <span class="price-original">92K</span></div>
-                                <button class="add-to-cart" onclick="addToCart('Decoration Tier 3')">Thêm vào giỏ</button>
+                                <div class="product-price">45K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -537,12 +515,12 @@
                             <span class="stock-badge">Còn hàng</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Decoration</div>
-                            <h3 class="product-name">Decoration Tier 4</h3>
-                            <p class="product-description">Discord: 105K | JPStore: 64K</p>
+                            <div class="product-category">Decorations</div>
+                            <h3 class="product-name">Avatar Decoration - 3 Tháng</h3>
+                            <p class="product-description">Gói tiết kiệm 3 tháng</p>
                             <div class="product-footer">
-                                <div class="product-price">64K <span class="price-original">105K</span></div>
-                                <button class="add-to-cart" onclick="addToCart('Decoration Tier 4')">Thêm vào giỏ</button>
+                                <div class="product-price">115K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -553,12 +531,12 @@
                             <span class="stock-badge">Còn hàng</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Decoration</div>
-                            <h3 class="product-name">Decoration Tier 5</h3>
-                            <p class="product-description">Discord: 111K | JPStore: 74K</p>
+                            <div class="product-category">Decorations</div>
+                            <h3 class="product-name">Profile Theme - 1 Tháng</h3>
+                            <p class="product-description">Theme cho profile cá nhân</p>
                             <div class="product-footer">
-                                <div class="product-price">74K <span class="price-original">111K</span></div>
-                                <button class="add-to-cart" onclick="addToCart('Decoration Tier 5')">Thêm vào giỏ</button>
+                                <div class="product-price">45K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -569,12 +547,12 @@
                             <span class="stock-badge">Còn hàng</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Decoration</div>
-                            <h3 class="product-name">Decoration Tier 6</h3>
-                            <p class="product-description">Discord: 131K | JPStore: 94K</p>
+                            <div class="product-category">Decorations</div>
+                            <h3 class="product-name">Profile Theme - 3 Tháng</h3>
+                            <p class="product-description">Theme 3 tháng với giá tốt</p>
                             <div class="product-footer">
-                                <div class="product-price">94K <span class="price-original">131K</span></div>
-                                <button class="add-to-cart" onclick="addToCart('Decoration Tier 6')">Thêm vào giỏ</button>
+                                <div class="product-price">115K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -585,12 +563,12 @@
                             <span class="stock-badge">Còn hàng</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Decoration</div>
-                            <h3 class="product-name">Decoration Tier 7</h3>
-                            <p class="product-description">Discord: 141K | JPStore: 99K</p>
+                            <div class="product-category">Decorations</div>
+                            <h3 class="product-name">Custom Profile Banner</h3>
+                            <p class="product-description">Banner profile tùy chỉnh theo yêu cầu</p>
                             <div class="product-footer">
-                                <div class="product-price">99K <span class="price-original">141K</span></div>
-                                <button class="add-to-cart" onclick="addToCart('Decoration Tier 7')">Thêm vào giỏ</button>
+                                <div class="product-price">60K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -601,12 +579,12 @@
                             <span class="stock-badge">Còn hàng</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Decoration</div>
-                            <h3 class="product-name">Decoration Tier 8</h3>
-                            <p class="product-description">Discord: 146K | JPStore: 109K</p>
+                            <div class="product-category">Decorations</div>
+                            <h3 class="product-name">Custom Emoji Pack</h3>
+                            <p class="product-description">Gói emoji tùy chỉnh độc quyền</p>
                             <div class="product-footer">
-                                <div class="product-price">109K <span class="price-original">146K</span></div>
-                                <button class="add-to-cart" onclick="addToCart('Decoration Tier 8')">Thêm vào giỏ</button>
+                                <div class="product-price">80K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -614,15 +592,15 @@
                     <div class="product-card" data-category="decoration">
                         <div class="product-image">
                             <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/65650a4e1469447afe380df2_DIS_Shop-for-all_Blog-header_V1.png" alt="">
-                            <span class="stock-badge">Còn hàng</span>
+                            <span class="stock-badge hot">Hot</span>
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Decoration</div>
-                            <h3 class="product-name">Decoration Tier 9</h3>
-                            <p class="product-description">Discord: 189K | JPStore: 139K</p>
+                            <div class="product-category">Decorations</div>
+                            <h3 class="product-name">Full Decoration Package</h3>
+                            <p class="product-description">Gói combo tất cả decoration - tiết kiệm nhất</p>
                             <div class="product-footer">
-                                <div class="product-price">139K <span class="price-original">189K</span></div>
-                                <button class="add-to-cart" onclick="addToCart('Decoration Tier 9')">Thêm vào giỏ</button>
+                                <div class="product-price">249K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -636,27 +614,11 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Server Boost</div>
-                            <h3 class="product-name">1x Boost - 1 Tháng</h3>
-                            <p class="product-description">Boost server Discord với 1 boost</p>
+                            <h3 class="product-name">2x Boost - 1 Tháng</h3>
+                            <p class="product-description">Boost server lên Level 1</p>
                             <div class="product-footer">
-                                <div class="product-price">14K</div>
-                                <button class="add-to-cart" onclick="addToCart('1x Boost 1 Tháng')">Thêm vào giỏ</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-category="server-boost">
-                        <div class="product-image">
-                            <img src="https://royalcdkeys.com/cdn/shop/files/DiscordServerBoost173.png?v=1746735652&width=1946" alt="">
-                            <span class="stock-badge">Còn hàng</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Server Boost</div>
-                            <h3 class="product-name">1x Boost - 3 Tháng</h3>
-                            <p class="product-description">Boost server Discord cho 3 tháng</p>
-                            <div class="product-footer">
-                                <div class="product-price">25K</div>
-                                <button class="add-to-cart" onclick="addToCart('1x Boost 3 Tháng')">Thêm vào giỏ</button>
+                                <div class="product-price">45K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -669,10 +631,26 @@
                         <div class="product-info">
                             <div class="product-category">Server Boost</div>
                             <h3 class="product-name">14x Boost - 1 Tháng</h3>
-                            <p class="product-description">Đạt Level 2 với 14 boosts</p>
+                            <p class="product-description">Đạt Level 2 ngay lập tức</p>
+                            <div class="product-footer">
+                                <div class="product-price">99K</div>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="server-boost">
+                        <div class="product-image">
+                            <img src="https://royalcdkeys.com/cdn/shop/files/DiscordServerBoost173.png?v=1746735652&width=1946" alt="">
+                            <span class="stock-badge">Còn hàng</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Server Boost</div>
+                            <h3 class="product-name">14x Boost - 2 Tháng</h3>
+                            <p class="product-description">Duy trì Level 2 cho 2 tháng</p>
                             <div class="product-footer">
                                 <div class="product-price">169K</div>
-                                <button class="add-to-cart" onclick="addToCart('14x Boost 1 Tháng')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -688,7 +666,7 @@
                             <p class="product-description">Đạt Level 2 cho 3 tháng</p>
                             <div class="product-footer">
                                 <div class="product-price">249K</div>
-                                <button class="add-to-cart" onclick="addToCart('14x Boost 3 Tháng')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -706,7 +684,7 @@
                             <p class="product-description">Add vào YouTube Premium Family. Xem video không quảng cáo, phát nền</p>
                             <div class="product-footer">
                                 <div class="product-price">20K</div>
-                                <button class="add-to-cart" onclick="addToCart('YouTube Family 1 Tháng')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -724,7 +702,7 @@
                             <p class="product-description">Add vào Spotify Premium Family. Nghe nhạc không quảng cáo, tải về offline</p>
                             <div class="product-footer">
                                 <div class="product-price">35K</div>
-                                <button class="add-to-cart" onclick="addToCart('Spotify Family 1 Tháng')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -740,7 +718,7 @@
                             <p class="product-description">Add vào Spotify Family cho 2 tháng với giá ưu đãi</p>
                             <div class="product-footer">
                                 <div class="product-price">55K</div>
-                                <button class="add-to-cart" onclick="addToCart('Spotify Family 2 Tháng')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -758,7 +736,7 @@
                             <p class="product-description">Cấp tài khoản Netflix Premium. Xem phim và series yêu thích chất lượng cao</p>
                             <div class="product-footer">
                                 <div class="product-price">65K</div>
-                                <button class="add-to-cart" onclick="addToCart('Netflix Account 1 Tháng')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -776,7 +754,7 @@
                             <p class="product-description">Canva Education cho sinh viên - truy cập template và công cụ thiết kế chuyên nghiệp</p>
                             <div class="product-footer">
                                 <div class="product-price">36K</div>
-                                <button class="add-to-cart" onclick="addToCart('Canva Edu 1 Năm')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -792,7 +770,7 @@
                             <p class="product-description">Canva Pro đầy đủ tính năng - thiết kế chuyên nghiệp với AI và template cao cấp</p>
                             <div class="product-footer">
                                 <div class="product-price">65K</div>
-                                <button class="add-to-cart" onclick="addToCart('Canva Pro 1 Năm')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -810,7 +788,7 @@
                             <p class="product-description">Dịch vụ build server Discord chuyên nghiệp theo ý tưởng của bạn. Bao gồm setup channels, roles, bots và tất cả tính năng</p>
                             <div class="product-footer">
                                 <div class="product-price">70K</div>
-                                <button class="add-to-cart" onclick="addToCart('Build Discord Server')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -828,7 +806,7 @@
                             <p class="product-description">1 triệu OwO Cash cho bot game OwO trên Discord. Mua pets, gems và items trong game</p>
                             <div class="product-footer">
                                 <div class="product-price">6.5K</div>
-                                <button class="add-to-cart" onclick="addToCart('OwO Cash 1M')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -846,7 +824,7 @@
                             <p class="product-description">250 Robux cho tài khoản Roblox (Đã tính thuế 30%). Mua avatar, items và game passes</p>
                             <div class="product-footer">
                                 <div class="product-price">59K</div>
-                                <button class="add-to-cart" onclick="addToCart('250 Robux')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -862,7 +840,7 @@
                             <p class="product-description">500 Robux cho tài khoản Roblox (Đã tính thuế 30%)</p>
                             <div class="product-footer">
                                 <div class="product-price">99K</div>
-                                <button class="add-to-cart" onclick="addToCart('500 Robux')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -878,7 +856,7 @@
                             <p class="product-description">750 Robux cho tài khoản Roblox (Đã tính thuế 30%)</p>
                             <div class="product-footer">
                                 <div class="product-price">149K</div>
-                                <button class="add-to-cart" onclick="addToCart('750 Robux')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
@@ -894,13 +872,78 @@
                             <p class="product-description">1000 Robux cho tài khoản Roblox (Đã tính thuế 30%)</p>
                             <div class="product-footer">
                                 <div class="product-price">199K</div>
-                                <button class="add-to-cart" onclick="addToCart('1000 Robux')">Thêm vào giỏ</button>
+                                <button class="buy-now-btn" onclick="window.location.href='#DISCORD_LINK'">Mua Ngay</button>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            <!-- Purchase & Support Page -->
+            <div id="purchase-page" class="page-content">
+                <div class="purchase-support-container">
+                    <div class="purchase-icon">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <h2 class="purchase-title">Mua Hàng Qua Discord Server</h2>
+                    <div class="purchase-message">
+                        <p class="purchase-intro">
+                            Vì một số lý do về bảo mật, chính sách thanh toán và để đảm bảo dịch vụ tốt nhất cho khách hàng, 
+                            chúng tôi hiện chưa cho phép mua hàng trực tiếp trên website.
+                        </p>
+                        <div class="purchase-reasons">
+                            <div class="reason-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <h4>Bảo Mật Giao Dịch</h4>
+                                    <p>Discord cung cấp môi trường giao dịch an toàn với mã hóa end-to-end</p>
+                                </div>
+                            </div>
+                            <div class="reason-item">
+                                <i class="fas fa-comments"></i>
+                                <div>
+                                    <h4>Hỗ Trợ Trực Tiếp</h4>
+                                    <p>Chat trực tiếp với team support để được tư vấn và giải đáp ngay lập tức</p>
+                                </div>
+                            </div>
+                            <div class="reason-item">
+                                <i class="fas fa-bolt"></i>
+                                <div>
+                                    <h4>Giao Hàng Nhanh Chóng</h4>
+                                    <p>Xử lý đơn hàng và giao sản phẩm ngay sau khi xác nhận thanh toán</p>
+                                </div>
+                            </div>
+                            <div class="reason-item">
+                                <i class="fas fa-user-check"></i>
+                                <div>
+                                    <h4>Xác Thực Khách Hàng</h4>
+                                    <p>Đảm bảo mọi giao dịch đều được xác thực và an toàn cho cả hai bên</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="purchase-note">
+                            <i class="fas fa-info-circle"></i>
+                            Chúng tôi đang phát triển hệ thống thanh toán trực tuyến và sẽ sớm cập nhật tính năng mua hàng trực tiếp trên website.
+                        </p>
+                    </div>
+                    <a href="https://discord.gg/UAtfXgYWmS" class="discord-btn" target="_blank">
+                        <i class="fab fa-discord"></i>
+                        Tham Gia Discord Server Để Mua Hàng
+                    </a>
+                    <div class="purchase-benefits">
+                        <h3>Mua hàng qua Discord bạn sẽ được:</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Tư vấn sản phẩm phù hợp nhất</li>
+                            <li><i class="fas fa-check-circle"></i> Hỗ trợ 24/7 qua chat trực tiếp</li>
+                            <li><i class="fas fa-check-circle"></i> Ưu đãi đặc biệt cho thành viên Discord</li>
+                            <li><i class="fas fa-check-circle"></i> Cập nhật sản phẩm mới và khuyến mãi sớm nhất</li>
+                            <li><i class="fas fa-check-circle"></i> Cộng đồng người dùng năng động và thân thiện</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div> <!-- End pages-wrapper -->
 
             <!-- Footer -->
             <footer class="footer">
@@ -913,28 +956,24 @@
                     <div class="footer-section">
                         <h3>Dịch Vụ</h3>
                         <ul>
-                            <li><a href="#">Discord Services</a></li>
-                            <li><a href="#">Premium Accounts</a></li>
-                            <li><a href="#">Gaming</a></li>
-                            <li><a href="#">Other Services</a></li>
+                            <li><a href="#" onclick="filterProducts('discord-nitro')">Discord Services</a></li>
+                            <li><a href="#" onclick="filterProducts('youtube')">Premium Accounts</a></li>
+                            <li><a href="#" onclick="filterProducts('robux')">Gaming</a></li>
+                            <li><a href="#" onclick="filterProducts('build-server')">Other Services</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h3>Hỗ Trợ</h3>
+                        <h3>Mua Hàng & Hỗ Trợ</h3>
                         <ul>
-                            <li><a href="#">Hướng dẫn mua hàng</a></li>
-                            <li><a href="#">Chính sách đổi trả</a></li>
-                            <li><a href="#">Câu hỏi thường gặp</a></li>
-                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="#" onclick="showPage('purchase')">Discord Server</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h3>Kết Nối</h3>
+                        <h3>Về Chúng Tôi</h3>
                         <ul>
-                            <li><a href="#">Discord Server</a></li>
-                            <li><a href="#">Facebook</a></li>
-                            <li><a href="#">Telegram</a></li>
-                            <li><a href="#">Email: <span class="__cf_email__" data-cfemail="f3808683839c8187b3998380879c8196dd909c9e">[email&#160;protected]</span></a></li>
+                            <li><a href="#" onclick="showPage('home')">Giới thiệu</a></li>
+                            <li><a href="#" onclick="showPage('home')">Tại sao chọn chúng tôi</a></li>
+                            <li><a href="#" onclick="showPage('home')">Đánh giá khách hàng</a></li>
                         </ul>
                     </div>
                 </div>
@@ -948,7 +987,7 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
-        <span id="toast-message">Đã thêm vào giỏ hàng!</span>
+        <span id="toast-message">Thao tác thành công!</span>
     </div>
 
     <script src="assets/js/index.js"></script>
