@@ -10,6 +10,27 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+    <!-- Welcome Popup -->
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <div class="welcome-popup">
+            <div class="welcome-icon">
+                <i class="fas fa-store"></i>
+            </div>
+            <h1 class="welcome-title">Chào Mừng Đến Với</h1>
+            <h2 class="welcome-brand"><span class="glow-text">JP</span>STORE</h2>
+            <p class="welcome-subtitle">Justa Pie - Premium Digital Services</p>
+            <p class="welcome-description">
+                🌟 Cửa hàng dịch vụ số cao cấp hàng đầu Việt Nam<br>
+                Giao hàng tức thì • Hỗ trợ 24/7 • Giá tốt nhất thị trường
+            </p>
+            <button class="welcome-btn" onclick="closeWelcome()">
+                <i class="fas fa-shopping-bag"></i>
+                Vào Cửa Hàng
+            </button>
+            <p class="welcome-note">Click để bắt đầu mua sắm</p>
+        </div>
+    </div>
+
     <!-- Top Header -->
     <div class="top-header">
         <div class="logo-container">
@@ -20,9 +41,20 @@
             </div>
         </div>
         <div class="header-actions">
-            <div class="search-box">
+            <button class="search-toggle" id="searchToggle" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <div class="search-box" id="searchBox">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Tìm kiếm sản phẩm...">
+            </div>
+            <button class="volume-toggle" id="volumeToggle" onclick="toggleVolume()">
+                <i class="fas fa-volume-up" id="volumeIconMobile"></i>
+            </button>
+            <div class="volume-control" id="volumeControl">
+                <i class="fas fa-volume-up" id="volumeIcon"></i>
+                <input type="range" id="volumeSlider" min="0" max="100" value="30" class="volume-slider">
+                <span class="volume-value" id="volumeValue">30%</span>
             </div>
         </div>
     </div>
@@ -371,10 +403,10 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Basic - 1 Tháng</h3>
-                            <p class="product-description">Nâng cấp trải nghiệm Discord với emoji tùy chỉnh, upload file lớn hơn</p>
+                            <h3 class="product-name">Nitro Trial - 3 Tháng</h3>
+                            <p class="product-description">Nitro Trial chỉ áp dụng cho tài khoản tạo trên 1 tháng và chưa từng sử dụng loại Nitro nào trước đây | Nitro Trial tính năng như Nitro Boost</p>
                             <div class="product-footer">
-                                <div class="product-price">40K</div>
+                                <div class="product-price">49K</div>
                                 <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
                             </div>
                         </div>
@@ -387,10 +419,10 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Classic - 1 Tháng</h3>
-                            <p class="product-description">Toàn bộ tính năng Nitro cơ bản với giá hợp lý</p>
+                            <h3 class="product-name">Nitro Boost - 1 Tháng</h3>
+                            <p class="product-description">Sử dụng emoji/sticker tùy chỉnh mọi nơi, stream video chất lượng 1080p/4K, 60fps, tải tệp lớn lên tới 500MB, tùy chỉnh ảnh đại diện động, banner, và tặng kèm 2 Boost Server</p>
                             <div class="product-footer">
-                                <div class="product-price">90K</div>
+                                <div class="product-price">89K</div>
                                 <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
                             </div>
                         </div>
@@ -403,42 +435,10 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Classic - 3 Tháng</h3>
-                            <p class="product-description">Tiết kiệm hơn khi mua gói 3 tháng</p>
+                            <h3 class="product-name">Nitro Boost - 2 Tháng</h3>
+                            <p class="product-description">Sử dụng emoji/sticker tùy chỉnh mọi nơi, stream video chất lượng 1080p/4K, 60fps, tải tệp lớn lên tới 500MB, tùy chỉnh ảnh đại diện động, banner, và tặng kèm 2 Boost Server</p>
                             <div class="product-footer">
-                                <div class="product-price">240K</div>
-                                <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-category="discord-nitro">
-                        <div class="product-image">
-                            <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
-                            <span class="stock-badge hot">Hot</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Full - 1 Tháng</h3>
-                            <p class="product-description">Trải nghiệm đầy đủ nhất với server boost, HD streaming</p>
-                            <div class="product-footer">
-                                <div class="product-price">150K</div>
-                                <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-category="discord-nitro">
-                        <div class="product-image">
-                            <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
-                            <span class="stock-badge hot">Hot</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Full - 3 Tháng</h3>
-                            <p class="product-description">Gói ưu đãi 3 tháng với đầy đủ tính năng</p>
-                            <div class="product-footer">
-                                <div class="product-price">375K</div>
+                                <div class="product-price">109K</div>
                                 <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
                             </div>
                         </div>
@@ -451,10 +451,42 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Discord Nitro</div>
-                            <h3 class="product-name">Nitro Full - 1 Năm</h3>
-                            <p class="product-description">Tiết kiệm nhất với gói 1 năm Nitro Full</p>
+                            <h3 class="product-name">Nitro Boost - 4 Tháng</h3>
+                            <p class="product-description">Sử dụng emoji/sticker tùy chỉnh mọi nơi, stream video chất lượng 1080p/4K, 60fps, tải tệp lớn lên tới 500MB, tùy chỉnh ảnh đại diện động, banner, và tặng kèm 2 Boost Server</p>
                             <div class="product-footer">
-                                <div class="product-price">1399K</div>
+                                <div class="product-price">229K</div>
+                                <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="discord-nitro">
+                        <div class="product-image">
+                            <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
+                            <span class="stock-badge">Còn hàng</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Nitro Boost</div>
+                            <h3 class="product-name">Nitro Boost - 6 tháng</h3>
+                            <p class="product-description">Sử dụng emoji/sticker tùy chỉnh mọi nơi, stream video chất lượng 1080p/4K, 60fps, tải tệp lớn lên tới 500MB, tùy chỉnh ảnh đại diện động, banner, và tặng kèm 2 Boost Server</p>
+                            <div class="product-footer">
+                                <div class="product-price">339K</div>
+                                <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="discord-nitro">
+                        <div class="product-image">
+                            <img src="https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/666cbcfd14d3f28b5309dd93_image5.png" alt="">
+                            <span class="stock-badge">Còn hàng</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Discord Nitro</div>
+                            <h3 class="product-name">Nitro Boost - 12 Tháng</h3>
+                            <p class="product-description">Sử dụng emoji/sticker tùy chỉnh mọi nơi, stream video chất lượng 1080p/4K, 60fps, tải tệp lớn lên tới 500MB, tùy chỉnh ảnh đại diện động, banner, và tặng kèm 2 Boost Server</p>
+                            <div class="product-footer">
+                                <div class="product-price">849K</div>
                                 <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
                             </div>
                         </div>
@@ -615,10 +647,26 @@
                         </div>
                         <div class="product-info">
                             <div class="product-category">Server Boost</div>
-                            <h3 class="product-name">2x Boost - 1 Tháng</h3>
-                            <p class="product-description">Boost server lên Level 1</p>
+                            <h3 class="product-name">1x Boost - 1 Tháng</h3>
+                            <p class="product-description">Khi boost thì tắt chặn tham gia bất thường</p>
                             <div class="product-footer">
-                                <div class="product-price">45K</div>
+                                <div class="product-price">14K</div>
+                                <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="server-boost">
+                        <div class="product-image">
+                            <img src="https://royalcdkeys.com/cdn/shop/files/DiscordServerBoost173.png?v=1746735652&width=1946" alt="">
+                            <span class="stock-badge">Còn hàng</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Server Boost</div>
+                            <h3 class="product-name">1x Boost - 3 Tháng</h3>
+                            <p class="product-description">Khi boost thì tắt chặn tham gia bất thường</p>
+                            <div class="product-footer">
+                                <div class="product-price">25K</div>
                                 <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
                             </div>
                         </div>
@@ -632,23 +680,7 @@
                         <div class="product-info">
                             <div class="product-category">Server Boost</div>
                             <h3 class="product-name">14x Boost - 1 Tháng</h3>
-                            <p class="product-description">Đạt Level 2 ngay lập tức</p>
-                            <div class="product-footer">
-                                <div class="product-price">99K</div>
-                                <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-category="server-boost">
-                        <div class="product-image">
-                            <img src="https://royalcdkeys.com/cdn/shop/files/DiscordServerBoost173.png?v=1746735652&width=1946" alt="">
-                            <span class="stock-badge">Còn hàng</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Server Boost</div>
-                            <h3 class="product-name">14x Boost - 2 Tháng</h3>
-                            <p class="product-description">Duy trì Level 2 cho 2 tháng</p>
+                            <p class="product-description">Khi boost thì tắt chặn tham gia bất thường</p>
                             <div class="product-footer">
                                 <div class="product-price">169K</div>
                                 <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
@@ -664,7 +696,7 @@
                         <div class="product-info">
                             <div class="product-category">Server Boost</div>
                             <h3 class="product-name">14x Boost - 3 Tháng</h3>
-                            <p class="product-description">Đạt Level 2 cho 3 tháng</p>
+                            <p class="product-description">Khi boost thì tắt chặn tham gia bất thường</p>
                             <div class="product-footer">
                                 <div class="product-price">249K</div>
                                 <button class="buy-now-btn" onclick="showPage('purchase')">Mua Ngay</button>
@@ -993,11 +1025,6 @@
     <audio id="bgMusic" loop>
         <source src="assets/audio/tapOut.mp3" type="audio/mpeg">
     </audio>
-
-    <!-- Music Control Button -->
-    <button class="music-control" id="musicControl" title="Tắt/Bật nhạc">
-        <i class="fas fa-volume-up"></i>
-    </button>
 
     <script src="assets/js/index.js"></script>
 </body>

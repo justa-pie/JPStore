@@ -1,3 +1,69 @@
+// Close Welcome Popup
+function closeWelcome() {
+    const overlay = document.getElementById('welcomeOverlay');
+    if (overlay) {
+        overlay.classList.add('hidden');
+        // Remove from DOM after animation
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 500);
+        
+        // Start music when entering the store
+        const bgMusic = document.getElementById('bgMusic');
+        if (bgMusic && bgMusic.paused) {
+            bgMusic.play().catch(error => {
+                console.log('Music autoplay blocked:', error);
+            });
+        }
+    }
+}
+
+// Toggle Search Box on Mobile
+function toggleSearch() {
+    const searchBox = document.getElementById('searchBox');
+    const searchToggle = document.getElementById('searchToggle');
+    const volumeControl = document.getElementById('volumeControl');
+    const volumeToggle = document.getElementById('volumeToggle');
+    
+    if (searchBox && searchToggle) {
+        searchBox.classList.toggle('active');
+        searchToggle.classList.toggle('active');
+        
+        // Close volume if open
+        if (volumeControl && volumeControl.classList.contains('active')) {
+            volumeControl.classList.remove('active');
+            volumeToggle.classList.remove('active');
+        }
+        
+        // Focus on input when opened
+        if (searchBox.classList.contains('active')) {
+            setTimeout(() => {
+                const input = searchBox.querySelector('input');
+                if (input) input.focus();
+            }, 100);
+        }
+    }
+}
+
+// Toggle Volume Control on Mobile
+function toggleVolume() {
+    const volumeControl = document.getElementById('volumeControl');
+    const volumeToggle = document.getElementById('volumeToggle');
+    const searchBox = document.getElementById('searchBox');
+    const searchToggle = document.getElementById('searchToggle');
+    
+    if (volumeControl && volumeToggle) {
+        volumeControl.classList.toggle('active');
+        volumeToggle.classList.toggle('active');
+        
+        // Close search if open
+        if (searchBox && searchBox.classList.contains('active')) {
+            searchBox.classList.remove('active');
+            searchToggle.classList.remove('active');
+        }
+    }
+}
+
 // Toggle Sidebar on Mobile
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -150,6 +216,30 @@ document.addEventListener('click', (e) => {
         !menuBtn.contains(e.target)) {
         sidebar.classList.remove('active');
     }
+    
+    // Close search/volume when clicking outside
+    if (window.innerWidth <= 768) {
+        const searchBox = document.getElementById('searchBox');
+        const searchToggle = document.getElementById('searchToggle');
+        const volumeControl = document.getElementById('volumeControl');
+        const volumeToggle = document.getElementById('volumeToggle');
+        
+        // Close search if clicking outside
+        if (searchBox && searchBox.classList.contains('active') &&
+            !searchBox.contains(e.target) && 
+            !searchToggle.contains(e.target)) {
+            searchBox.classList.remove('active');
+            searchToggle.classList.remove('active');
+        }
+        
+        // Close volume if clicking outside
+        if (volumeControl && volumeControl.classList.contains('active') &&
+            !volumeControl.contains(e.target) && 
+            !volumeToggle.contains(e.target)) {
+            volumeControl.classList.remove('active');
+            volumeToggle.classList.remove('active');
+        }
+    }
 });
 
 // Smooth Scroll for All Anchor Links
@@ -242,12 +332,15 @@ document.addEventListener('DOMContentLoaded', () => {
         product.style.display = 'block';
     });
 
-    // Background Music Control
+    // Background Music Control with Volume Slider
     const bgMusic = document.getElementById('bgMusic');
-    const musicControl = document.getElementById('musicControl');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeValue = document.getElementById('volumeValue');
+    const volumeIcon = document.getElementById('volumeIcon');
     
-    if (bgMusic && musicControl) {
-        bgMusic.volume = 0.3; // Set volume to 30%
+    if (bgMusic && volumeSlider && volumeValue && volumeIcon) {
+        // Set initial volume
+        bgMusic.volume = volumeSlider.value / 100;
         let musicStarted = false;
 
         // Function to start music
@@ -256,8 +349,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 bgMusic.play().then(() => {
                     console.log('🎵 Music started!');
                     musicStarted = true;
-                    musicControl.classList.remove('muted');
-                    musicControl.classList.add('playing');
                 }).catch(error => {
                     console.log('Waiting for user interaction...', error);
                 });
@@ -284,20 +375,47 @@ document.addEventListener('DOMContentLoaded', () => {
             document.addEventListener(event, startOnInteraction, { once: true });
         });
 
-        // Music control button
-        musicControl.addEventListener('click', (e) => {
-            e.stopPropagation();
+        // Volume slider control
+        volumeSlider.addEventListener('input', (e) => {
+            const volume = e.target.value;
+            bgMusic.volume = volume / 100;
+            volumeValue.textContent = volume + '%';
             
-            if (bgMusic.paused) {
-                bgMusic.play();
-                musicControl.classList.remove('muted');
-                musicControl.classList.add('playing');
-                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+            // Update both icons based on volume
+            const iconClass = volume == 0 ? 'fas fa-volume-mute' : 
+                            volume < 50 ? 'fas fa-volume-down' : 'fas fa-volume-up';
+            
+            volumeIcon.className = iconClass;
+            
+            // Also update mobile toggle icon
+            const volumeIconMobile = document.getElementById('volumeIconMobile');
+            if (volumeIconMobile) {
+                volumeIconMobile.className = iconClass;
+            }
+        });
+
+        // Click icon to toggle mute/unmute
+        volumeIcon.addEventListener('click', () => {
+            const volumeIconMobile = document.getElementById('volumeIconMobile');
+            
+            if (bgMusic.volume > 0) {
+                // Mute
+                volumeIcon.dataset.previousVolume = volumeSlider.value;
+                volumeSlider.value = 0;
+                bgMusic.volume = 0;
+                volumeValue.textContent = '0%';
+                volumeIcon.className = 'fas fa-volume-mute';
+                if (volumeIconMobile) volumeIconMobile.className = 'fas fa-volume-mute';
             } else {
-                bgMusic.pause();
-                musicControl.classList.add('muted');
-                musicControl.classList.remove('playing');
-                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                // Unmute to previous volume
+                const previousVolume = volumeIcon.dataset.previousVolume || 30;
+                volumeSlider.value = previousVolume;
+                bgMusic.volume = previousVolume / 100;
+                volumeValue.textContent = previousVolume + '%';
+                
+                const iconClass = previousVolume < 50 ? 'fas fa-volume-down' : 'fas fa-volume-up';
+                volumeIcon.className = iconClass;
+                if (volumeIconMobile) volumeIconMobile.className = iconClass;
             }
         });
     }
